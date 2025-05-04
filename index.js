@@ -1,3 +1,27 @@
+export default {
+  async fetch(request) {
+    const response = await fetch(request);
+    const headers = new Headers(response.headers);
+    
+    // 设置 CORS 头
+    headers.set("Access-Control-Allow-Origin", "*");
+    headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    headers.set("Access-Control-Allow-Headers", "Content-Type");
+
+    // 处理 OPTIONS 预检请求
+    if (request.method === "OPTIONS") {
+      return new Response(null, {
+        status: 204,
+        headers: headers
+      });
+    }
+
+    return new Response(response.body, {
+      status: response.status,
+      headers: headers
+    });
+  }
+};
 // 目标服务器地址和端口
    const TARGET_IP = "199.245.100.23";
    const TARGET_PORT = "54666";
