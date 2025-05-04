@@ -10,6 +10,7 @@
          url.hostname = TARGET_IP;
          url.port = TARGET_PORT;
 
+         url.protocol = "http:"; // 强制 HTTP
          // 转发请求并返回响应
          const response = await fetch(url.toString(), request);
          return response;
